@@ -1,0 +1,42 @@
+﻿body {
+    margin: 40px;
+    border: 1px solid black;
+    margin-right: 50px;
+    padding: 2px;
+    font-family: Helvetica;
+    color: darkblue;
+}
+table#SearchCheckBox {
+    background-color: antiquewhite;
+   
+}
+h1 {
+   
+   font-family: arial, sans-serif;
+   font-weight: bold;
+   text-align:center;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+table#WeatherLogTable {
+        background-color: salmon;
+        margin: 5px;
+    }
+
+#weatherPage{
+background-color:turquoise;
+}
+
+
+.validated:invalid {
+    /* rules to show user which fields are invalid*/
+    background-color: red;
+}
+.validated:valid {
+    /* rules to show user which fields are valid*/
+    background-color: green;
+}

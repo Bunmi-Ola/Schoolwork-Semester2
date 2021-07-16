@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>PARTB-MT</title>
+	<meta charset="utf-8" />
+
+    <style>
+        table, th, td {            
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        h1{
+            align-content:center;
+        }
+      
+          </style>
+</head>
+<body>
+
+    <form id="GradeCalculationForm">
+        <table style="width:50%;">
+            <tr>
+                <td colspan="3">
+                    <h1>Grade Average Calculator Form</h1>
+                </td>
+            </tr>
+            <tr>
+                <td> &nbsp;</td>
+                <td>Input Numbers Below</td>
+                <td rowspan="7">
+                    <input id="btnCheck" type="button" value="Check Numbers" onclick="Check()" /><br><br>
+                    <input id="btnCalculate" type="button" value="Calcualte" onclick="calculate()" /><br>
+                </td>
+            <tr>
+            <tr>
+                <td>
+                    <p>Price Per Widget Sold:</p>
+                </td>
+                <td>
+                    <input id="WidgetPriceTextBox" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Number of Widgets Sold:</p>
+                </td>
+                <td>
+                    <input id="NumberWidgetsSoldTextBox" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Commission Rate (%):</p>
+                </td>
+                <td>
+                    <input id="CommissionRateTextBox" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <p>Click Calculate Button to see result below</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Commission Earned:</p>
+                </td>
+                <td>
+                    <input id="CommissionEarnedTextBox" type="text" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+   <script>
+            function Check() {
+                    if (document.getElementById("WidgetPriceTextBox").value == "") {
+
+                        window.alert("All input values are required");
+                    }
+                    if (document.getElementById("NumberWidgetsSoldTextBox").value == "") {
+
+                        window.alert("All input values are required");
+                    }
+
+                    if (document.getElementById("CommissionRateTextBox").value == "") {
+
+                        window.alert("All input values are required");
+                    }
+                   
+                }
+            function calculate() {
+               
+                    var widgetPrice = eval(document.getElementById("WidgetPriceTextBox").value);
+                    var widgetNumberSold = eval(document.getElementById("NumberWidgetsSoldTextBox").value);
+                    var commissionRate = eval(document.getElementById("CommissionRateTextBox").value);
+
+                    var commissionearned = eval(document.getElementById("WidgetPriceTextBox").value) * 
+                         eval(document.getElementById("NumberWidgetsSoldTextBox").value) * eval(document.getElementById("CommissionRateTextBox").value);
+
+                    document.getElementById("CommissionEarnedTextBox").value = commissionearned;
+                }
+                
+               
+        </script>   
+
+
+</body>
+</html>

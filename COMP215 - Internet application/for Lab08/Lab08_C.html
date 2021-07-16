@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("button#End").click(function () {
+                // your answer here:
+                $("p").append("YES!");
+            });
+
+            $("button#beginning").click(function () {
+                // your answer here:
+                $("p").prepend("YES!");
+            });
+
+         });
+    </script>
+
+</head>
+<body>
+
+    <p>Some paragraphs. Some paragraphs. Some paragraphs. Some paragraphs. </p>
+     <br />
+
+    <h2>Lab 08 Part C Exercise 1 - Use a jQuery method to insert the text "YES!" at the end of a p element.</h2>
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_dom_add1">jQuery Add Exercise 1</a> <br />
+    <button id="End">Click me to insert the text "YES!" at the end of a p element.</button> <br />
+
+    <h2>Lab 08 Part C Exercise 2 - Use a jQuery method to insert the text "YES!" at the beginning of a p element.</h2>
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_dom_add2">jQuery Add Exercise 2</a> <br />
+    <button id="beginning">Click me to insert the text "YES!" at the beginning of a p element.</button> <br />
+
+</body>
+</html>

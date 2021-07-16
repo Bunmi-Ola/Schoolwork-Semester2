@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation Example</title>
+	<meta charset="utf-8" />
+
+    <style>
+        .validated:invalid { background-color:lightpink}
+        .validated:valid { background-color:lightblue}
+
+    </style>
+
+</head>
+<body>
+	<h2>Based on w3schools example:</h2>
+    <a href="https://www.w3schools.com/js/js_validation_api.asp">w3schools Example Reference</a>
+	
+	<h2>Mozilla references </h2>
+	<a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation">https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation</a><br />
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation">https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation</a><br />
+	<a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation">https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation</a><br />
+
+    <p>Enter a number and click OK:</p>
+    <form>
+        <input id="id1" class="validated" required type="number" min="10" max="100" />
+        <input id="email" class="validated" required type="email" />
+        <input id="OKButton" type="button" value="OK" onclick="// method 1 to attach an event handler using onclick attribute- myFunction()" />
+    </form>
+    <p>If the number is less than 10 (the input's min attribute) or greater than 100 (the input's max attribute), an error message will be displayed.</p>
+
+    <p id="demo"></p>
+
+    <script>
+// method 2 to attach event handler programmatically 
+        var OKBtn = document.getElementById("OKButton");
+        OKBtn.onclick = myFunction;
+        //OKBtn.addEventListener("click",myFunction); //alternate syntax
+
+        // **********************************
+        // ID TEXTBOX event code 
+        // **********************************
+ // Add invalid event directly to input element
+        var IDTextbox = document.getElementById("id1");
+		
+        //IDTextbox.oninvalid = function (evt) { // assigning event handler as an anonymous inner function declaration - function code goes here };
+
+        IDTextbox.oninput = function (event) {
+            IDTextbox.checkValidity(); // check valid state, and force raise oninvalid if needed
+        };
+        IDTextbox.oninvalid = checkInput;		 // assigning event handler by using a named function defined elsewhere in your code
+
+        function checkInput(event) {
+            InputBox = event.target;
+            InputBox.setCustomValidity("");  // clear out the validity message
+
+            if (!InputBox.validity.valid) {
+                // if any validation constraint fails
+
+                if (InputBox.validity.rangeOverflow) {
+                    InputBox.setCustomValidity("Custom Message: Value too large"); 
+                }
+                if (InputBox.validity.rangeUnderflow) {
+                    InputBox.setCustomValidity("Custom Message: Value too small");
+                }
+                if (InputBox.validity.valueMissing) {
+                    InputBox.setCustomValidity("Custom Message: Value is missing");
+                }
+                if (InputBox.validity.typeMismatch) {
+                    InputBox.setCustomValidity("Custom Message: Value is not a number (type mismatch)");
+                }
+            }
+            
+        }
+
+
+        // **********************************
+        // EMAIL TEXTBOX event code 
+        // **********************************
+        var EmailTextbox = document.getElementById("email");
+        EmailTextbox.oninput = function (event) {
+            EmailTextbox.checkValidity(); // check and force oninvalid event
+        };
+        EmailTextbox.oninvalid = function(event) {
+            InputBox = event.target;
+            InputBox.setCustomValidity("");  // clear out the validity message
+
+            if (!InputBox.validity.valid) {
+                // if any validation constraint fails
+                if (InputBox.validity.valueMissing) {
+                    InputBox.setCustomValidity("Custom Message: Value is missing");
+                }
+                if (InputBox.validity.typeMismatch) {
+                    InputBox.setCustomValidity("Custom Message: Value is not a number (type mismatch)");
+                }
+            }
+            
+        };
+      
+
+
+
+        // **********************************
+        // BUtton CLick event code 
+        // **********************************
+
+
+function myFunction() {
+    txt = "";
+    var IDTextbox = document.getElementById("id1");
+
+    if (!IDTextbox.validity.valid) { 
+        // if any validation constraint fails
+
+        if (IDTextbox.validity.rangeOverflow) {
+            txt += " Value too large vs System Message " + IDTextbox.validationMessage;
+        } 
+        if (IDTextbox.validity.rangeUnderflow) { 
+            txt += " Value too small vs System Message " + IDTextbox.validationMessage;
+        } 
+        if (IDTextbox.validity.valueMissing) { 
+            txt += " Value is missing vs System Message " + IDTextbox.validationMessage;
+        } 
+        if (IDTextbox.validity.typeMismatch) { 
+            txt += " Value is not a number (type mismatch) vs System Message " + IDTextbox.validationMessage;
+        } 
+
+    }
+
+  document.getElementById("demo").innerHTML = txt;
+}
+    </script>
+
+
+</body>
+</html>

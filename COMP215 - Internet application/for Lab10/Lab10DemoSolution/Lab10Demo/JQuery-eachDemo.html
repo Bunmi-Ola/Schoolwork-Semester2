@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>JQuery .each Demo</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // block of code to run when page loaded
+
+            //get the button, attach a click handler
+            $("button").click(
+                function () {
+                             // Code to run when button is clicked
+                             // select all the li's and iterate over them
+                             // for each of the li's , run the function 
+                             $("li").each(
+                                 // run this function for each li
+                                 function (index, LIelement) {
+                                     //alert($(this).text())
+                                     // find matching para
+                                     var value = $(LIelement).text();
+                                     var p = $("p:contains(" + value + ")");
+                                     p.text("output: " + value + " index: " + index );
+                            });
+                        });
+        });
+    </script>
+</head>
+<body>
+
+    <button>Output the value of each list item</button>
+
+    <ul>
+        <li>Coffee</li>
+        <li>Milk</li>
+        <li>Soda</li>
+    </ul>
+
+
+    <p>Coffee</p>
+    <p>Milk</p>
+    <p>Soda</p>
+
+</body>
+</html>

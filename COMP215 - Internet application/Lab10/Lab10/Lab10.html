@@ -1,0 +1,127 @@
+﻿
+<!DOCTYPE html>
+
+    <html>
+    
+        <head>
+            <title></title>
+            <meta charset="utf-8" />
+
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+            <!-- jQuery library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+            <!-- Popper JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+            <link href="StyleSheet.css" rel="stylesheet" />
+        </head>
+        <body>
+            <main id="contactPage">
+                <form>
+                    <h3>Contact details</h3>
+                    <div class="container" id="contact">
+                        <div class="row ">
+                            <div class="col-sm-3">
+                               
+                                <label for="First Name"> First Name:</label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input id="firstname" name="firstname" type="text" class="validated" required/><br><br>
+                            </div>
+                            <div class="col-sm-6">
+                               
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-sm-3">
+
+                                <label for="Address"> Address:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="address" name="address" type="text" class="validated" required/><br><br>
+                            </div>
+                            <div class="col-sm-5">
+                               
+                            </div>
+                            
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-sm-3">
+
+                                <label for="Email"> Email:</label>
+                            </div>
+                            <div class="col-sm-4" >
+                                <input id="email" name="email" type="email" class="validated" required/><br><br>
+                            </div>
+                            <div class="col-sm-5">
+                                <input style="width:70px" type="submit" value="Submit" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <br /><br />
+                <table>
+                    <tr>
+                        <td>First Name &nbsp;&nbsp;</td>
+                        <td>Address &nbsp;&nbsp;</td>
+                        <td>Email &nbsp;&nbsp;</td>
+                    </tr>
+                </table>
+
+            </main>
+
+            <script>
+
+            $(document).ready(function(){
+                var mainElement = document.getElementById('contactPage');
+
+            $(mainElement).find('form input[type="submit"]').click(
+
+           
+          function(evt) {
+              evt.preventDefault(); // stop the submit from posting (default behavior)
+              if ($(evt.target).parents('form')[0].checkValidity()) {  // continue only if all form field are valid
+
+                  // Add code for Lab part F here
+                  var contact = serializeForm();
+                  var html = '<tr><td>' + contact.firstname + '</td>' +
+                             '<td>' + contact.address + '</td>' +
+                             '<td>' + contact.email + '</td></tr>'
+
+                
+                  //var html = '<tr><td>' + $("#firstname").val() + '</td>' +
+                  //           '<td>' + $("#address").val() + '</td>' +
+                  //           '<td>'+ $(mainElement).find('input[type="email"]').val()   +'</td></tr>';
+
+                  $(mainElement).find('table tbody').append(html);
+                  $(mainElement).find('form :input[name]').val('')
+              }
+          });
+
+         
+
+              function serializeForm() {
+            var inputFields = $(mainElement).find('form :input');
+            var result = {};
+            $.each(inputFields, function(index, value) {
+                 if ($(value).attr('name')) {
+                     result[$(value).attr('name')] = $(value).val();
+                 }
+            });
+            return result;
+        }
+            });
+            </script>
+
+</body>
+   
+</html>
+

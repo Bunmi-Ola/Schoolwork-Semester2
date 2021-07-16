@@ -1,0 +1,112 @@
+
+select ('Today is ') || TO_CHAR (SYSDATE, 'Day, DD FMMonth YYYY HH24:MI:SS') from dual;
+	SELECT FIRSTNAME, LASTNAME	FROM EMPLOYEE
+	WHERE ((CURRENT_DATE - HIREDATE )/(365.25)) = (select max((CURRENT_DATE - HIREDATE )/(365.25))FROM EMPLOYEE);
+
+select EMPLOYEE.EMPID, JOB.DESCRIPTION, JOB.PAYRATE
+from EMPLOYEE inner join JOB ON EMPLOYEE.JOBCODE = JOB.JOBCODE;
+
+SET SERVEROUTPUT ON
+
+DECLARE
+Todaydate date;
+
+BEGIN 
+  Todaydate := SYSDATE();
+ 
+  DBMS_OUTPUT.PUT_LINE('Today is ' || to_char(Todaydate, 'Day, DD MONTH YYYY HH24:MI:SS') );
+  
+END;
+/
+
+
+DECLARE
+firstName varchar2(25);
+lastName varchar2(25);
+
+BEGIN 
+
+	SELECT FIRSTNAME, LASTNAME	INTO firstName, lastName				
+	FROM EMPLOYEE
+	WHERE ((CURRENT_DATE - HIREDATE )/(365.25)) = (select max((CURRENT_DATE - HIREDATE )/(365.25))FROM EMPLOYEE);
+  
+  DBMS_OUTPUT.PUT_LINE('Employee: '|| firstName || ' ' || lastName);
+  
+END;
+/
+
+DECLARE
+firstName varchar2(50);
+lastName varchar2(50);
+EmployeeID INT;
+JobDescription varchar2(50);
+Rate NUMBER(10,2);
+
+BEGIN 
+firstName := '&First_Name';
+lastName := '&Last_Name';
+
+
+	select EMPLOYEE.EMPID, JOB.DESCRIPTION, JOB.PAYRATE	into 	EmployeeID, JobDescription, Rate	
+	from EMPLOYEE inner join JOB ON EMPLOYEE.JOBCODE = JOB.JOBCODE
+  where firstName = FIRSTNAME and LASTNAME = lastName;
+  
+  DBMS_OUTPUT.PUT_LINE('Employee: '|| EmployeeID || ' ' || JobDescription || ' ' ||Rate);
+  
+END;
+/
+
+
+
+
+SET SERVEROUTPUT ON;
+DECLARE
+  V_EMPID EMPLOYEE.EMPID%TYPE; --Containers
+  V_DESC JOB.DESCRIPTION%TYPE; --Containers
+  V_PRATE JOB.PAYRATE%TYPE; --Containers
+  V_FNAME EMPLOYEE.FIRSTNAME%TYPE;
+  V_LNAME EMPLOYEE.LASTNAME%TYPE;
+BEGIN
+  V_FNAME := '&FNAME';
+  V_LNAME := '&LNAME';
+  --DBMS_OUTPUT.PUT_LINE('%'||V_LNAME ||'%');
+    
+  SELECT EMPLOYEE.EMPID, JOB.DESCRIPTION, JOB.PAYRATE
+  INTO V_EMPID, V_DESC, V_PRATE
+  FROM EMPLOYEE, JOB
+  WHERE EMPLOYEE.JOBCODE = JOB.JOBCODE
+  AND LASTNAME LIKE '%'||V_LNAME ||'%' 
+  AND FIRSTNAME LIKE '%'||V_FNAME ||'%';
+  
+  if sql%rowcount > 0 then
+  DBMS_OUTPUT.PUT_LINE('EMP ID: '|| V_EMPID ||'JOB DESCRIPTION: '|| V_DESC || 'PAY RATE: ' || V_PRATE);
+  
+END if ;
+  DBMS_OUTPUT.PUT_LINE('No Data found');
+END;
+/
+
+DECLARE
+FName Employee.FIRSTNAME%Type := 'FName';
+LName Employee.LASTNAME%Type := 'LName';
+V_EMPID Employee.EMPID%Type ;
+V_Description JOB.Description%Type;
+V_PAYRATE JOB.PAYRATE;
+
+BEGIN 
+
+	select EMPLOYEE.EMPID, JOB.DESCRIPTION, JOB.PAYRATE	into 	V_EMPID, V_Description, V_PAYRATE	
+	from EMPLOYEE, JOB WHERE EMPLOYEE.JOBCODE = JOB.JOBCODE
+  AND UPPER(Employee.FIRSTNAME) = UPPER(FName) and UPPER(Employee.LASTNAME)= UPPER(LName);
+  
+  DBMS_OUTPUT.PUT_LINE('Employee ID: '|| EMPID || 'JobDescription ' || Description || 'PAYRATE ' ||PAYRATE);
+  
+  EXCEPTION
+  when NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('There is no employee with such name' || FName|| ' ' || LName);
+    
+ WHEN TOO_MANY_ROWS THEN
+  DBMS_OUTPUT.PUT_LINE('More than one employee with the same name, please decalre a cursor');
+  
+END;
+/

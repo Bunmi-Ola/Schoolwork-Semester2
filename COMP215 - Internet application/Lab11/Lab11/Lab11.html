@@ -1,0 +1,224 @@
+﻿+<!DOCTYPE html>
+<html>
+<head>
+   
+    <title></title>
+    <meta charset="utf-8" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <link href="StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <main id="contactPage">
+        <form>
+            <h3>Contact details</h3>
+            <div class="container" id="contact">
+                <div class="row ">
+                    <div class="col-sm-3">
+
+                        <label for="First Name"> First Name:</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input id="firstname" name="firstname" type="text" class="validated" required /><br><br>
+                    </div>
+                    <div class="col-sm-6">
+
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-sm-3">
+
+                        <label for="Address"> Address:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input id="address" name="address" type="text" class="validated" required /><br><br>
+                    </div>
+                    <div class="col-sm-5">
+
+                    </div>
+
+                </div>
+
+                <div class="row ">
+                    <div class="col-sm-3">
+
+                        <label for="Email"> Email:</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input id="email" name="email" type="email" class="validated" required /><br><br>
+                    </div>
+                    <div class="col-sm-5">
+                        <input style="width:70px" type="submit" value="Submit" />
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <br /><br />
+        <table>
+            <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Phone number</th>
+                    <th>Email address</th>
+                    <th><a class="deleteAll" href="#">Delete All</a></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+
+    </main>
+
+    <script>
+
+        //https://www.w3schools.com/js/js_json_intro.asp
+
+        $(document).ready(function(){
+            var mainElement = document.getElementById('contactPage');
+
+            loadContacts();  // (declared below) loads and displays existing data contacts in storage
+
+            function loadContacts() {
+                //retreiving data from local storage, 
+                var contactsStored = localStorage.getItem('contacts');
+                //if there are elements stored, then retrieve
+                if (contactsStored) {
+                    contacts = JSON.parse(contactsStored);
+                    $.each(contacts, function (index, contact) {
+                        //show object by properties and place into table
+                        var row = $('<tr>');
+                        var html = '<td>' + contact.firstname + '</td>' +
+                                   '<td>' + contact.address + '</td>' +
+                                   '<td>' + contact.email + '</td>' +
+                                   '<td><a class="delete" href="#">delete</a></td>';
+
+                        // assigning an iD to the row by using current time
+                        row.data().contactId = contact.id;
+
+                        // place contact details into row
+                        row.append(html);
+                        // add row to table body in main element
+                        $(mainElement).find('table tbody').append(row);
+                    });
+                }
+            }
+            //serializeForm works on any level of nested array syntax in your element names 
+            //and creates arrays if items end in [], just like you'd expect.
+            function serializeForm() {
+                // find input tag in form element in main element
+                var inputFields = $(mainElement).find('form :input');
+                var result = {};
+                //geting value of each index 
+                $.each(inputFields, function (index, value) {
+                    // get attribute name value of a input tag 
+                    if ($(value).attr('name')) {
+                        //placing the value into the result array 
+                        result[$(value).attr('name')] = $(value).val();
+                    }
+                });
+                return result;
+            }
+
+            function store(contact) {
+                //retreiving data from local storage, 
+                var contactsStored = localStorage.getItem('contacts');
+                //starting with javascript object
+                var contacts = []; // create empty array
+                if (contactsStored) { // if we have any data in storage
+                   
+                    // load contacts array with that data
+                    contacts = JSON.parse(contactsStored);
+                }
+                contacts.push(contact); // add new contact (push) to end of array
+                // overwrite any existing 'contacts' key with new stringified array
+
+                //storing in local storage, contacts is the key where JSON data is stored
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+            }
+
+            function saveContact() {
+                //take the info from serializeform into an object
+                var contact = serializeForm();
+
+                //assigning contact id using clock as a unique key
+                contact.id = $.now();
+                var row = $('<tr>');
+                var html = '<td>' + contact.firstname + '</td>' +
+                           '<td>' + contact.address + '</td>' +
+                           '<td>' + contact.email + '</td>' +
+                           '<td><a class="delete" href="#">delete</a></td>';
+                row.data().contactId = contact.id;
+                row.append(html);
+                store(contact); // save record in local storage
+
+                //assigning value to the table
+                $(mainElement).find('table tbody').append(row);
+
+                //clear the input value in the form
+                $(mainElement).find('form :input[name]').val('');
+            }
+
+            function deleteContact(evt) {
+
+                // get the ID from the parent row of the selected link
+                var contactId = $(evt.target).parents('tr').data().contactId;
+
+                // get current data as an array from local storage
+                var contacts = JSON.parse(localStorage.getItem('contacts'));
+
+                // use JQuery to filter out the contacts with required ID to delete
+                // for each element in contacts array, run function
+                // if true, keep the element in selection, otherwise not
+                // effectly deletes the item with id = ContactID
+                var newContacts = contacts.filter(function (c) {
+                    return c.id != contactId;
+                });
+                // overwrite storage with new array
+                localStorage.setItem('contacts', JSON.stringify(newContacts));
+
+                // remove the parent row of the selected link
+                $(evt.target).parents('tr').remove();
+            }
+
+
+            $(mainElement).find("a.deleteAll").click(
+    function (evt) {
+        evt.preventDefault();
+        localStorage.clear();
+        $(mainElement).find('table tbody').empty();
+    }
+);
+
+            $(mainElement).on("click", "a.delete",
+                function (evt) {
+                    evt.preventDefault();
+                    deleteContact(evt);
+                }
+            );
+
+            $(mainElement).find('form input[type="submit"]').click(
+                 function (evt) {
+                     evt.preventDefault();
+                     saveContact();
+                 });
+
+            
+        });
+    </script>
+
+</body>
+
+</html>
+

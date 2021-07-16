@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+    
+    <h1>Store and retrieve data from local storage.</h1>
+    <a href="https://www.w3schools.com/js/js_json_intro.asp">https://www.w3schools.com/js/js_json_intro.asp</a><br />
+    <a href="https://www.w3schools.com/js/tryit.asp?filename=tryjson_store">https://www.w3schools.com/js/tryit.asp?filename=tryjson_store</a><br />
+    <a href="https://www.w3schools.com/html/html5_webstorage.asp">https://www.w3schools.com/html/html5_webstorage.asp</a><br />
+
+    <h3>Starting with an object:</h3>
+    <p id="demo1"></p>
+    <h3>Can be stringified as:</h3>
+    <p id="demo2"></p>
+    <h3>Starting with a stringified object:</h3>
+    <p id="demo3"></p>
+    <h3>Can be converted to an object and used:</h3>
+    <p id="demo4"></p>
+    <h3>Show data retreived from storage as text:</h3>
+    <p id="demo5"></p>
+    <h3>Show data retreived from storage as an object:</h3>
+    <p id="demo6"></p>
+
+<script>
+    var myObj, myJSON, text, obj
+
+    // demo1 start with an javascript object
+    myObj = { name: "John", age: 31, city: "New York" };
+
+    // Use (ie.) show object by properties
+    document.getElementById("demo1").innerHTML = "name= " + myObj.name +
+                                                 " age= " + myObj.age +
+                                                 " city= " + myObj.city;
+
+    // demo2 stringify (serialize) and display object
+    myJSON = JSON.stringify(myObj);
+    // show
+    document.getElementById("demo2").innerHTML = myJSON
+
+    // demo 3 - work "backwards" start with a string, 
+    // convert to object and display (note use single quotes (or esc \) 
+    // to enclose double quotes
+    //myJSON = "{\"name\":\"John\",\"age\":31,\"city\":\"New York\"}"
+    myJSON = '{"name":"John","age":31,"city":"New York"}'
+
+    // convert to javascript object 
+    myObj = JSON.parse(myJSON)
+    // Use (ie) show object by properties
+    document.getElementById("demo3").innerHTML = "name= " + myObj.name +
+                                                 " age= " + myObj.age +
+                                                 " city= " + myObj.city;
+
+    // demo4 start with an object, stringify and store as text
+    myObj = { name: "John", age: 31, city: "New York" };
+    myJSON = JSON.stringify(myObj);
+    // now store in local storage
+    localStorage.setItem("testJSON", myJSON)
+
+    // demo5 retreive data from local storage, 
+    // show as as text 
+    text = localStorage.getItem("testJSON");
+    document.getElementById("demo5").innerHTML = text;
+    
+    // demo6 and as an object
+    myObj = JSON.parse(text);
+    document.getElementById("demo6").innerHTML = "name= " + myObj.name +
+                                             " age= " + myObj.age +
+                                             " city= " + myObj.city;
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

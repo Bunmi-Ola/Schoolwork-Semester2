@@ -1,0 +1,80 @@
+﻿body {
+    margin-top: 20px;
+}
+.toputborder
+{   
+   
+    border: 1px solid black;
+}
+
+.leftputborder{
+   
+    border-style: solid;
+    border-width: 0px 0 0 1px;
+    border-color:black;
+}
+
+.rightputborder{
+
+    border-style: solid;
+    border-width: 0px 1px 0 1px;
+    border-color:black;
+}
+
+div#Header{
+    width: 100%;
+    background-color: aquamarine;
+    text-align: center;
+    font: bold; 
+  
+}
+h1{
+    text-align: center;
+    font: bold; 
+    color: red;
+}
+
+div#SocialMedia{
+    background-color: lightblue;
+    text-align: center;
+    font: bold; 
+  
+}
+img#CompanyLogo{
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+h2{
+    color: darkblue;
+     
+}
+#button ul {
+		list-style-type:circle;
+		margin: 10px;
+		margin-left: 40px;
+		text-align: left;
+
+}
+#button li a:hover {
+		color: red;
+        font-size:20px; 
+		}
+div#AboutUs{
+    background-color: lightsteelblue;
+        
+}
+div#footer{
+    text-align: center;  
+}
+h2#Contact{
+    color:blueviolet;
+}
+h1#about{
+ color:blueviolet;
+}
+h3{
+    font-size: 20px;
+    color: black;
+}
+

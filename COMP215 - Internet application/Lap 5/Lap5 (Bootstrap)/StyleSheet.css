@@ -1,0 +1,52 @@
+﻿
+
+h1{  
+     
+    font: bold; 
+    text-decoration: underline;
+    text-align:center;
+    padding: 20px 20px 50px 20px;
+}
+
+
+
+.col1 {
+    background-color: lightcoral;
+    height: 50px;
+    border-style: solid;
+    border-width: 1px;
+    border-color:black;
+   
+}
+.col2 {
+    background-color:blue;
+    height: 50px;
+     border-style: solid;
+    border-width: 1px;
+    border-color:black;
+
+}
+.col3 {
+    background-color:white;
+    height: 50px;
+
+}
+.toputborder
+{   
+   
+    border: 1px solid black;
+}
+
+.putborder{
+   
+    border-style: solid;
+    border-width: 0px 0 0 1px;
+    border-color:black;
+}
+
+.movestoputborder{
+
+    border-style: solid;
+    border-width: 0px 1px 0 1px;
+    border-color:black;
+}

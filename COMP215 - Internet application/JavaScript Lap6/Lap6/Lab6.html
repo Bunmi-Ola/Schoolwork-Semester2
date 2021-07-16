@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   
+    <title>Lab06</title>
+    <meta charset="utf-8" />
+   
+    <style>
+        #floatingForm{           
+            width: 300px;
+            height: 160px;
+            top: 60px;
+            left: 320px;
+            right: 320px;
+            position: absolute;
+            border: dashed blue;
+        }
+
+        #controllerForm {
+            width: 300px;
+            height: 90px;
+            position: absolute;
+            top: 250px;
+            left: 320px;
+            border: solid blue;
+        }
+
+    </style>
+</head>
+<body>
+ 
+        <form id="floatingForm">
+            <h2>Javascript Test Page</h2>
+            <span id="outputMessage"></span><input id="btnCheckText" type="button" value="Check Text" onclick="IsEmpty()" />&nbsp;
+            <input id="txtText1" type="text" /><span id="outputMessage"></span><br />
+            <input id="btnRelocate" type="button" value="Go To" onclick="GoTo()" />&nbsp;
+            <input id="txtText2" type="text" /><br />
+            <input id="btnCheckBrowser" type="button" value="My Browser is:" onclick="Navigator()" />&nbsp;
+            <input id="txtText3" type="text" /><br />
+        </form>
+
+
+        <form id="controllerForm">
+            <h3>Form Controller</h3>
+            <input id="moveleft" type="button" value="Move Left" onclick="controlForm(1)" />&nbsp;
+            <input id="Show" type="button" value="Show" onclick="controlForm(2)" />&nbsp;
+            <input id="Hide" type="button" value="Hide" onclick="controlForm(3)" />&nbsp;
+            <input id="moveright" type="button" value="Move Right" onclick="controlForm(4)" />&nbsp;
+        </form>
+  
+    <script>
+                function IsEmpty() {
+                    if (document.getElementById("txtText1").value == "Move Left"){
+
+                        document.getElementById("outputMessage").innerHTML = "empty"
+
+                    } else {
+                        //window.alert("The textbox not is empty")
+                        document.getElementById("outputMessage").innerHTML = "not empty"
+
+                    }
+                }
+                function GoTo() {
+                    window.location.href = document.getElementById("txtText2").value
+                }
+                function Navigator() {
+                    document.getElementById("txtText3").value = navigator.appName
+                }
+    </script>
+    <script>
+        startLeft = 320;
+
+        function controlForm(opt) {
+
+                    if (opt == 1) {
+                        startLeft -= 10;
+                        document.getElementById("floatingForm").style.left = startLeft + "px";
+                    }
+                    if (opt == 2) {
+                        document.all.floatingForm.style.visibility = "visible"
+                    }
+                    if (opt == 3) {
+                        document.all.floatingForm.style.visibility = "Hidden"
+                    }
+                    if (opt == 4) {
+                        startLeft += 10;
+                        document.all.floatingForm.style.left = startLeft + "px"
+                    }
+                }
+
+
+
+            </script>
+</body>
+</html>

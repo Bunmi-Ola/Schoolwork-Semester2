@@ -1,0 +1,66 @@
+﻿body {
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: 15px;
+     background-color: coral;
+     width: 100%;
+     position: fixed;
+}
+
+#left {
+float: left;
+width: 100px;
+margin-left:30px;
+ margin-top: 80px;
+   
+}
+#right {
+float: right;
+width: 200px;
+margin-right: 200px;
+
+
+}
+
+#center {
+margin-left: 210px;  /* 218px works better, why? */
+margin-right: 210px;
+}
+
+#top {
+margin: 1px;
+padding: 30px;
+text-align: center;
+background: #ccc;
+background-color: darkgray;
+font-size: 35px;
+  color: white;
+}
+
+#footer {
+background: #ccc;
+margin: 1px;
+text-align: center;
+clear: both;
+
+padding: 10px 10px 10px 10px;
+
+}
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  height: 500px; 
+}
+img {
+ float:left;
+ width: 350px;
+height: 500px;
+margin: 10px;
+}
+
+#website link {
+
+font: bold;
+font
+ 
+}

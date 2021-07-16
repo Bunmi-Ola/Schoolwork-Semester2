@@ -1,0 +1,17 @@
+20190422_163040
+GET /Query.htm HTTP/1.1Accept: text/html, application/xhtml+xml, image/jxr, */*
+Accept-Language: en-US
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393
+Accept-Encoding: gzip, deflate
+Host: localhost:12346
+Connection: Keep-Alive
+
+20190422_163112
+GET /doSERVICE?Criteria=Bunmi&Field=FirstName&Submit=Run+Service HTTP/1.1Accept: text/html, application/xhtml+xml, image/jxr, */*
+Referer: http://localhost:12346/Query.htm
+Accept-Language: en-US
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393
+Accept-Encoding: gzip, deflate
+Host: localhost:12346
+Connection: Keep-Alive
+

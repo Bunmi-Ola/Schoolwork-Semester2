@@ -1,0 +1,52 @@
+﻿body {
+}
+
+body{
+    background-color: lightblue;
+}
+#button {
+	width: 20em;
+	/*border-right: 1px solid #000000;*/
+	padding: 10px 0 1em 0;
+	margin-bottom: 1em;
+	font-family: Algerian, Arial, sans-serif;   
+	
+	color: orange;
+	}
+
+#button ul {
+		list-style: none;
+		margin: 0;
+		padding: 2px;
+		border: 2px;
+
+		}
+		
+#button li {
+		border-bottom: 5px solid #90bade;
+		margin: 0;
+         border-style: double;
+		}
+
+#button li a {
+		display: block;
+		padding: 1px 5px 5px 0.5em;
+		border-left: 2px solid #1958b7;
+		border-right: 2px solid #508fc4;
+		background-color: turquoise;
+		color: orange;
+		text-decoration: none;
+		width: 95%;
+		}
+
+#button li a:hover {
+		border-left: 10px solid #1c64d1;
+		border-right: 10px solid #5ba3e0;
+		background-color: #2586d7;
+		color: lightgray;
+        font-size:20px; 
+		}
+
+
+
+

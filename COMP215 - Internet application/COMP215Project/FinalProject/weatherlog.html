@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Search</title>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+    <link href="weather.css" rel="stylesheet" />
+
+    <script src="weather.js"></script>
+
+</head>
+<body>
+    <main id="weatherPage">
+
+        <div class="container" id="Weather Search">
+
+            <form id="WeatherSearchForm">
+
+                <div class="row toputborder">
+                    <div class="col-sm-12" id="Top">
+
+                        <h1>OpenWeatherMap Weather Log</h1>
+                    </div>
+                </div>
+
+                <div class="row toputborder">
+                    <div class="col-sm-4" id="Top">
+                        <h3>Search by:</h3>
+                        <input id="CityRadio" name="searchBy" type="radio" value="City" checked /> City Name <br />
+                        <input id="PostalRadio" name="searchBy" type="radio" value="Postal" /> Postal Code <br />
+                        <input id="LatitudeRadio" name="searchBy" type="radio" value="Latitude" /> Latitude / Longitude <br />
+
+                    </div>
+
+                    <div class="col-sm-8" id="Top">
+                        <h2>Show in search results:</h2>
+                        <table id="SearchCheckBox">
+                            <tr>
+
+                                <td>  <input id="Longitudecheckbox" type="checkbox" name="check" value="Longitude" /> Longitude</td>
+                                <td>  <input id="Latitudecheckbox" type="checkbox" name="check" value="Latitude" /> Latitude</td>
+                                <td>  <input id="Temperaturecheckbox" type="checkbox" name="check" value="Temperature" /> Temperature</td>
+                            </tr>
+                            <tr>
+                                <td>  <input id="Pressurecheckbox" type="checkbox" name="check" value="Pressure" /> Pressure</td>
+                                <td>  <input id="Humiditycheckbox" type="checkbox" name="check" value="Humidity" /> Humidity</td>
+                                <td>  <input id="WindSpeedcheckbox" type="checkbox" name="check" value="Wind Speed" /> Wind Speed</td>
+                            </tr>
+                            <tr>
+                                <td>  <input id="WindDirectioncheckbox" type="checkbox" name="check" value="Wind Direction" /> Wind Direction</td>
+                                <td>  <input id="Sunrisecheckbox" type="checkbox" name="check" value="Sunrise" /> Sunrise </td>
+                                <td>  <input id="Sunsetcheckbox" type="checkbox" name="check" value="Sunset" /> Sunset</td>
+                            </tr>
+
+                        </table> <br />
+                    </div>
+                </div>
+                <div class="row toputborder">
+                    <div class="col-sm-10" id="Top">
+
+                        <div id="City" class="myDiv">
+                            <label>City Name:</label> &nbsp; <input name="inputTextbox" id="CityNameTextbox" required class="validated" type="text" value="Enter City Name" />
+                            <label>Country Code:</label> &nbsp; <input name="inputTextbox" id="CityCountryCodeTextbox" required class="validated" type="text" value="Enter Country Code" pattern="[A-Z]{2}" /> <br />
+                        </div><br />
+
+                        <div id="Postal" class="myDiv">
+                            <label>Postal Code:</label> &nbsp; <input name="inputTextbox" id="PostalCodeTextbox" required class="validated" type="text" pattern="[A-Z][0-9][A-Z]" value="Enter Postal" />
+                            <label>Country Code:</label> &nbsp; <input name="inputTextbox" id="PostalCountryCodeTextbox" class="validated" type="text" value="Enter Country Code" required pattern="[A-Z]{2}" /> <br />
+                        </div><br />
+
+                        <div id="Latitude" class="myDiv">
+                            <label>Latitude:</label> &nbsp; <input name="inputTextbox" id="LatitudeTextbox" class="validated" required type="number" step="any" min="-90" max="90" value="Latitude" />
+                            <label>Longetude:</label> &nbsp; <input name="inputTextbox" id="LongetudeTextbox" class="validated" required type="number" step="any" min="-180" max="180" value="Longetude" /> <br />
+                        </div>
+                    </div>
+                    <div class="col-sm-2" id="Top">
+
+                        <input id="SearchButton" type="submit" value="Search" />
+                    </div>
+
+
+                </div>
+
+            </form>
+        </div>
+
+        <!--Div to display each weather search information needed/-->
+        <h3>Current Weather</h3>
+        <div id="mySearchResult">
+            <p id="city_name"></p>
+            <p id="country_name"></p>
+            <p id="weather_description"></p>
+            <p id="Longitude"></p>
+            <p id="Latitude"></p>
+            <p id="Temperature"></p>
+            <p id="pressure"></p>
+            <p id="Humidity"></p>
+            <p id="wind_speed"></p>
+            <p id="wind_Direction"></p>
+            <p id="Sunrise"></p>
+            <p id="Sunset"></p>
+        </div>
+
+        <h3>Search Log:</h3>
+        <!--Weather log table displaying weather search history--> 
+        <table id="WeatherLogTable">
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Longitude</th>
+                    <th>Latitude</th>
+                    <th>Weather</th>
+                    <th>Temperature</th>
+                    <th>Pressure</th>
+                    <th>Humidity</th>
+                    <th>Wind Speed</th>
+                    <th>Wind Direction</th>
+                    <th>Sunrise</th>
+                    <th>Sunset</th>
+
+                    <th><input id="ClearLog" type="button" value="ClearLog"></th>
+
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,259 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 007</title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+    <script>
+        var CurrentItemIndex = 0;
+      
+           
+            var SelectBox = document.getElementById("ProductType"); // get selectbox
+            CurrentItemIndex = SelectBox.selectedIndex;// integer of current item in slectbox
+            var SelectedItem = SelectBox.options[CurrentItemIndex]; //get selected item by index
+       
+            var image = document.getElementsByName("image-swap")[0];
+            
+            if (CurrentItemIndex == 1) {
+                document.getElementById("cabinetline").style.visibility = "visible"
+                document.getElementById("cabinets").style.visibility = "visible"
+                image.src = "/Kitchens/base.jpg";
+
+            }
+            if (CurrentItemIndex == 2) {
+                document.getElementById("cabinetline").style.visibility = "visible"
+                document.getElementById("cabinets").style.visibility = "visible"
+                image.src = "/Kitchens/wall.jpg";
+
+            }
+
+            if (CurrentItemIndex == 3) {
+                document.getElementById("cabinetline").style.visibility = "hidden"
+                document.getElementById("cabinets").style.visibility = "hidden"
+                image.src = "/Kitchens/counters.jpg";
+
+            }
+          
+        }
+        function myFunction(productLine) {
+            document.getElementById("result").value = productLine;
+            radioChecked = document.getElementById("result").value;
+            if (radioChecked == 1) {
+                document.getElementById("kitchenCalculatorForm").style.borderColor = "blue";
+            }
+            if (radioChecked == 2) {
+                document.getElementById("kitchenCalculatorForm").style.borderColor = "Red";
+            }
+            if (radioChecked == 3) {
+                document.getElementById("kitchenCalculatorForm").style.borderColor = "Green";
+            }
+        }
+      
+        
+        var OutputMessage = 0;
+        function getOutput() {
+
+            Check();
+            radioChecked = document.getElementById("result").value;
+
+            if (CurrentItemIndex == 1 && radioChecked==1) {
+                OutputMessage = 69.99 * eval(document.getElementById("footage").value) * eval(document.getElementById("cabinets").value)*50.99;
+                document.getElementById("output").value = Math.floor(OutputMessage * 100) / 100;
+               
+            }
+            if (CurrentItemIndex == 1 && radioChecked == 2) {
+                OutputMessage = 79 * eval(document.getElementById("footage").value) * eval(document.getElementById("cabinets").value) * 79.99;
+                document.getElementById("output").value = Math.floor(OutputMessage * 100) / 100;
+                
+            }
+            if (CurrentItemIndex == 1 && radioChecked == 3) {
+                OutputMessage = 99.99 * eval(document.getElementById("footage").value) * eval(document.getElementById("cabinets").value) * 89.99;
+                document.getElementById("output").value = Math.floor(OutputMessage * 100) / 100;
+                 
+            }
+            if (CurrentItemIndex == 2 && radioChecked == 1) {
+                OutputMessage = 99.99 * eval(document.getElementById("footage").value) * eval(document.getElementById("cabinets").value) * 50.99;
+                document.getElementById("output").value = Math.floor(OutputMessage * 100) / 100;
+              
+            }
+            if (CurrentItemIndex == 2 && radioChecked == 2) {
+                OutputMessage = 179.00 * eval(document.getElementById("footage").value) * eval(document.getElementById("cabinets").value) * 79.99;
+                document.getElementById("output").value = Math.floor(OutputMessage * 100) / 100;
+                
+            }
+            if (CurrentItemIndex == 2 && radioChecked == 3) {
+                OutputMessage = 200.99 * eval(document.getElementById("footage").value)  * eval(document.getElementById("cabinets").value) * 89.99;
+                document.getElementById("output").value = Math.floor(OutputMessage * 100) / 100;
+               
+            }
+            if (CurrentItemIndex == 3 && radioChecked == 1) {
+                OutputMessage = 30.99 * eval(document.getElementById("footage").value);
+                document.getElementById("output").value = Math.floor(OutputMessage * 100) / 100;
+               
+               
+            }
+            if (CurrentItemIndex == 3 && radioChecked == 2) {
+                OutputMessage = 189.99 * eval(document.getElementById("footage").value);
+                document.getElementById("output").value = Math.floor(OutputMessage * 100) / 100;
+                
+            }
+            if (CurrentItemIndex == 3 && radioChecked == 3) {
+                OutputMessage = 212.99 * eval(document.getElementById("footage").value);
+                document.getElementById("output").value = Math.floor(OutputMessage * 100) / 100;
+               
+            }
+           
+        }
+
+        function Check() {
+            if (document.getElementById("footage").value < 3 || document.getElementById("footage").value > 50) {
+
+                window.alert("Linear footage must be between 3 to 50 feet");
+            }
+
+            if (document.getElementById("cabinets").value < 0 || document.getElementById("cabinets").value > 5) {
+
+                window.alert("The number of Corner Units must be fro 0 to 5");
+            }
+
+        }
+
+    </script>
+
+    <style>
+        #kitchenCalculatorForm{
+        width: 900px;
+        height: 500px;
+        top: 50px;
+        left: 100px;
+        right: 100px;
+        position: absolute;
+        border-style: solid;
+        border-width: 2px;
+        border-color:black;
+        padding-left: 20px;
+        background-color: cadetblue;
+       
+        }
+
+        .image{
+       
+        width: 400px;
+        height: 400px;       
+        margin-top: 80px;       
+        }
+
+ 
+.validated:valid {
+    /* rules to show user which fields are OK (are valid) */
+    border-color: aqua;
+}
+
+.validated:invalid {
+    /* rules to show user which fields are NOT OK (are invalid) */
+  
+    border-color: red;
+}
+
+
+       
+</style>
+
+</head>
+<body>
+    <div class="container" id="kitchenCalculatorForm">
+        <div class="row ">
+            <div class="col-sm-7">
+                <form>
+                    <h1> Kitchen Calcualtor</h1> <br>
+                    <div class="row ">
+                        <div class="col-sm-7">
+                            1. Select your product type:
+                        </div>
+                        <div class="col-sm-5">
+                            <select id="ProductType" name="ProductType" class="validated" required onchange="selectOption(this)">
+                                <option value="">--Select Your Product-- </option>
+                                <option value="1">Base Cabinets</option>
+                                <option value="2">Wall Cabinets</option>
+                                <option value="3">Counter Tops</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="row ">
+                        <div class="col-sm-7">
+                            2. Select the product line:
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="radio" id="standard" name="productLine" checked onclick="myFunction(this.value)" value="1">Empire Standard<br>
+                            <input type="radio" id="elite" name="productLine" onclick="myFunction(this.value)" value="2">Kitchen Elite<br>
+                            <input type="radio" id="gold" name="productLine" onclick="myFunction(this.value)" value="3">Gold Star Plus<br><br>
+
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-sm-7">
+                            3. Enterthe linear footage:
+                        </div>
+                        <div class="col-sm-5">
+                            <input id="footage" type="text" class="validated" required min="3" max="50" autofocus autocomplete="off" /><br><br>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-sm-7" id="cabinetline">                          
+                                4. If cabinets, how many corner units:
+                            </div>
+                            <div class="col-sm-5" id="cabinetline">
+                                <input id="cabinets" type="text" class="validated" required min="0" max="5" autofocus autocomplete="off" /><br><br>
+                          
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-7">
+                            Click the <input type="button" onclick="getOutput()" value="calculate"> button
+                            <br><br>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-sm-7">
+                            5. And see the results:
+                        </div>
+                        <div class="col-sm-5">
+                            <input id="output" type="text" /><br><br>
+
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="result">
+
+                </form>
+            </div>
+     
+
+            <div class="col-sm-5 image">
+                <img src="" name="image-swap"  />
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html> 

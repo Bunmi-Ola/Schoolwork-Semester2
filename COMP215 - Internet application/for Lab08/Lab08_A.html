@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 08 Part A Exercise 1</title>
+	<meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            // put your answer in the button click event
+            $("button#Hide").click(function () {
+                // your answer here:
+                $("p").hide();
+            });
+
+            // put your answer in the button click event
+            $("button#test").click(function () {
+                // your answer here:
+                $("#Test").hide();
+            });
+
+            $("button#class").click(function () {
+                // your answer here:
+                $(".Test").hide();
+            });
+
+            $("button#allElement").click(function () {
+                // your answer here:
+                $("*").hide();
+            });
+
+
+            $("button#href").click(function () {
+                // your answer here:
+                $("[href]").hide();
+            });
+
+
+            $("button#oldTableRows").click(function () {
+                // your answer here:
+                $("tr:odd").hide();
+            });
+        });
+    </script>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+
+</head>
+<body>
+  
+    <h3>Exercise Sample Elements:</h3>
+    <p>Some paragraphs. Some paragraphs. Some paragraphs. Some paragraphs. </p>
+    <p id="Test"> IDTest paragraphs. IDTest paragraphs. IDTest paragraphs. IDTest paragraphs. </p>
+    <p>Some paragraphs. Some paragraphs. Some paragraphs. Some paragraphs. </p>
+
+    <h2> Table </h2>
+    <table style="width:50%;">
+        <tr>
+            <td>cell 1 &nbsp;</td>
+            <td>cell 2&nbsp;</td>
+        </tr>
+        <tr>
+            <td>cell 3 &nbsp;</td>
+            <td>cell 4 &nbsp;</td>
+        </tr>
+        <tr>
+            <td>cell 5 &nbsp;</td>
+            <td>cell 6 &nbsp;</td>
+        </tr>
+    </table>
+    <br /> <br />
+
+    <h2>Lab 08 Part A Exercise 1 - Use the correct selector to hide all elements.</h2>
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_selectors1">jQuery Selectors Exercise 1</a>
+    <button id="Hide">Click me to hide paragraphs</button>
+    <br /> <br />
+
+    <h2>Lab 08 Part A Exercise 2 - Use the correct selector to hide an element with id="test".</h2><br /> 
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_selectors2">jQuery Selectors Exercise 2</a><br /> 
+     <button id="test">Click me to hide an element with id="test"</button><br /> 
+
+    <h2 class="Test">Lab 08 Part A Exercise 3 - Use the correct selector to hide all elements with class="test".</h2><br /> 
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_selectors3">jQuery Selectors Exercise 3</a><br /> 
+    <button id="class">Click me to hide all elements with class="test" </button><br /> 
+
+    <h2>Lab 08 Part A Exercise 4 - Use the correct selector to hide all elements in the document.</h2><br /> 
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_selectors4">jQuery Selectors Exercise 4</a><br /> 
+    <button id="allElement">Click me to hide all elements in the document. </button><br /> 
+
+    <h2>Lab 08 Part A Exercise 5 - Use the correct selector to hide all elements with an href attribute.</h2><br />
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_selectors5">jQuery Selectors Exercise 5</a><br /> 
+     <button id="href">Click me to hide all elements with an href attribute. </button><br /> 
+
+    <h2>Lab 08 Part A Exercise 6 - Use the correct selector to hide all odd table rows in a table.</h2><br />
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_selectors6">jQuery Selectors Exercise 6</a><br />
+    <button id="oldTableRows">Click me to hide all odd table rows in a table. </button><br /> 
+
+</body>
+</html>

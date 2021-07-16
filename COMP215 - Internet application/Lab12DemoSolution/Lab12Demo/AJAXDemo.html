@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+
+    
+        <h2>The XMLHttpRequest Object</h2>
+        <button type="button" onclick="loadDoc()">Change Content</button>
+    
+    
+    <div id="demo">Result Data Here</div>
+
+    <script>
+        function loadDoc() {
+            // (1) create an XMLHttpRequest object
+            var xhttp = new XMLHttpRequest();
+
+            // (2) important setup: implement an event handler
+            // that is called when the XMLHttpRequest object
+            // has received a response (or an error)
+            xhttp.onreadystatechange = function () {
+                // call back function (even handler) 
+                // process respsonse from the server
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML =
+                    this.responseText;
+                }
+            };
+
+            // (3) open a connection to a URL 
+            xhttp.open("GET", "ajax_info.txt", true);
+            // (4) send request
+            xhttp.send();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 10 Setup Demo</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        table td {
+            border: 1px solid black;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <main id="contactPage">
+
+        <h1>JQuery Find and Append(Add) References</h1>
+        <a href="https://www.w3schools.com/jquery/jquery_dom_add.asp">https://www.w3schools.com/jquery/jquery_dom_add.asp</a>
+        <br />
+        <a href="https://www.w3schools.com/jquery/traversing_find.asp">https://www.w3schools.com/jquery/traversing_find.asp</a>
+        <br /><br />
+
+        <form>
+            Firstname:<input id="firstname" name="firstname" type="text" /><br />
+            Address:<input id="address" name="address" type="text" /><br />
+            Email:<input id="email" name="email" type="email" /><br />
+            <input id="Button1" type="submit" value="submit" />
+        </form>
+
+        <br /><br />
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td>Address</td>
+                <td>Email</td>
+            </tr>
+        </table>
+    </main>
+
+    <script>
+    $(document).ready(function(){
+    var mainElement = document.getElementById('contactPage');
+
+    $(mainElement).find('form input[type="submit"]').click(
+        function(evt) {
+            //Function code goes here
+            evt.preventDefault(); // stop the submit from posting (default behavior)
+            //$("#Button").parent().checkValidity()
+            //   button .  all parents .. match 'form' [0th, ie first] . call checkValidity method ...
+            if ($(evt.target).parents('form')[0].checkValidity()) {
+                // continue only if all form field are valid
+
+                // Add code for Lab part F here
+                // Method 2: Part (F)
+                var contact = serializeForm();
+                var html = '<tr><td>' + contact.firstname + '</td>' +
+                           '<td>' + contact.address + '</td>' +
+                           '<td>' + contact.email + '</td></tr>'
+                // method 1: Part (D)
+                // Replace ????? characters below with correct JQuery statements
+                // build a html row as a string
+                //var html = '<tr><td>'+ document.getElementById("firstname").value +'</td>'+
+                //           '<td>'+  $("#address").val() +'</td>'+
+                //           '<td>' + $(mainElement).find('input[type="email"]').val() + '</td></tr>';
+
+                $(mainElement).find('table tbody').append(html);
+                $(mainElement).find('form :input[name]').val('')
+            }
+
+
+
+        });
+
+    function serializeForm() {
+        // select all 4 of the form input elements
+        var inputFields = $(mainElement).find('form :input');
+        // create an empty literal object
+        var result = {};
+        // iterate over all inputFields, execute the given function
+        $.each(inputFields, function (index, item) {
+            // check if we have input box (only the text boxes have names)
+            // i.e. textboxes have a name attibute
+            // true if name attribute is not null
+            var name = $(item).attr('name');
+            var value = $(item).val();
+            if (name) {
+                // add the name attribute as a property of result object
+                // result["propery"] = "value";
+                result[name] = value;
+            }
+        });
+        return result;
+    }
+
+    });
+
+            function serializeForm() {
+            var inputFields = $(mainElement).find('form :input');
+            var result = {};
+            $.each(inputFields, function(index, value) {
+                 if ($(value).attr('name')) {
+                     result[$(value).attr('name')] = $(value).val();
+                 }
+            });
+            return result;
+        }
+
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+
+SET SERVEROUTPUT ON
+--1
+DECLARE
+Todaydate date;
+
+BEGIN 
+  Todaydate := SYSDATE();
+ 
+  DBMS_OUTPUT.PUT_LINE('Today is ' || to_char(Todaydate, 'Day, DD MONTH YYYY HH24:MI:SS') );
+  
+END;
+/
+
+--2
+DECLARE
+firstName varchar2(25);
+lastName varchar2(25);
+
+BEGIN 
+
+	SELECT FIRSTNAME, LASTNAME	INTO firstName, lastName				
+	FROM EMPLOYEE
+	WHERE ((CURRENT_DATE - HIREDATE )/(365.25)) = (select max((CURRENT_DATE - HIREDATE )/(365.25))FROM EMPLOYEE);
+  
+  DBMS_OUTPUT.PUT_LINE('Employee: '|| firstName || ' ' || lastName);
+  
+END;
+/
+
+
+--QUESTION #3
+SET SERVEROUTPUT ON;
+DECLARE
+  V_EMPID EMPLOYEE.EMPID%TYPE; --Containers
+  V_DESC JOB.DESCRIPTION%TYPE; --Containers
+  V_PRATE JOB.PAYRATE%TYPE; --Containers
+  V_FNAME EMPLOYEE.FIRSTNAME%TYPE;
+  V_LNAME EMPLOYEE.LASTNAME%TYPE;
+BEGIN
+  V_FNAME := '&FNAME';
+  V_LNAME := '&LNAME';
+
+SELECT EMPLOYEE.EMPID, JOB.DESCRIPTION, JOB.PAYRATE
+  INTO V_EMPID, V_DESC, V_PRATE
+  FROM EMPLOYEE, JOB
+  WHERE EMPLOYEE.JOBCODE = JOB.JOBCODE
+  AND LASTNAME LIKE '%'||V_LNAME ||'%' 
+  AND FIRSTNAME LIKE '%'||V_FNAME ||'%';
+  
+  DBMS_OUTPUT.PUT_LINE('EMP ID: '|| V_EMPID ||'JOB DESCRIPTION: '|| V_DESC || 'PAY RATE: ' || V_PRATE);
+    EXCEPTION
+    when NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('There is no employee with such name ' ||V_FNAME || ' ' ||  V_LNAME);
+    
+ WHEN TOO_MANY_ROWS THEN
+  DBMS_OUTPUT.PUT_LINE('More than one employee with the same name, please decalre a cursor');
+  
+
+END;
+/
+
+
+-- QUESTION #4
+
+DECLARE
+
+V_EMPID EMPLOYEE.EMPID%Type;
+V_JOBDESC JOB.DESCRIPTION%type;
+v_payRate job.payrate%type;
+V_FNAME EMPLOYEE.FIRSTNAME%TYPE;
+V_LNAME EMPLOYEE.LASTNAME%TYPE;
+
+
+Cursor emp_cur is Select e.empId, j.DESCRIPTION, j.PAYRATE from Employee 
+e Inner join Job j On e.jobCode = j.jobCode Where Upper(FIRSTNAME) = Upper(V_FNAME) And Upper(LastName) =Upper(V_LNAME);
+
+Begin
+V_FNAME := '&FNAME';
+V_LNAME := '&LNAME';
+
+OPEN emp_cur;
+
+LOOP
+
+
+Fetch emp_cur into v_empid, v_jobdesc, v_payRate;
+
+Exit when emp_cur%NotFound;
+
+DBMS_OUTPUT.put_line('Employee ID: '||v_empid||' Description: '|| v_jobdesc||'Pay Rate: '||'$'|| v_payRate);
+
+End Loop;
+
+if emp_cur %Rowcount <1 Then
+
+DBMS_OUTPUT.put_line('There is no name with '||V_FNAME|| ' '||V_LNAME);
+
+end if;
+
+close emp_cur;
+
+End;
+/
+
+
+-- QUESTION #5
+CREATE OR REPLACE TRIGGER TimeSheet_Hour
+AFTER INSERT ON TIMESHEET
+DECLARE
+      v_aboveRegHours INTEGER; 
+
+BEGIN
+SELECT count(*) into v_aboveRegHours from TIMESHEET    where REGHOURS > 40;
+
+IF v_aboveRegHours > 0 then
+UPDATE TIMESHEET
+SET REGHOURS = 40,
+OTIMEHOURS =(OTIMEHOURS +REGHOURS - 40)
+WHERE REGHOURS > 40;
+End if ;
+END TimeSheet_Hour;
+/

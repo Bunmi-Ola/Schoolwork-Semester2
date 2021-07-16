@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Javascript Objects</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <h1>Javascript Object Definitions</h1>
+    <a href="https://www.w3schools.com/js/js_object_definition.asp">https://www.w3schools.com/js/js_object_definition.asp</a>
+    <br />
+    <h2>Try it</h2>
+    <a href="https://www.w3schools.com/js/tryit.asp?filename=tryjs_object_create_2">https://www.w3schools.com/js/tryit.asp?filename=tryjs_object_create_2</a>
+    <br />
+
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <p id="demo4"></p>
+
+<script>
+    // create an object from an Object Literal
+    var person = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 50,
+        eyeColor: "blue"
+    };
+
+    // create object properties separately, without a liter object
+    //person["firstName"] = "john";
+    //person["lastName"] = "Doe";
+    //person["eyecolor"] = "blue";
+
+
+    //demo1 output some properties from the object
+    document.getElementById("demo1").innerHTML =
+    person.firstName + " is " + person.age + " years old.";
+
+    // demo2 change the eyeColor property and output it
+    person.eyeColor = "brown";
+    document.getElementById("demo2").innerHTML =
+    person.firstName + " eyes are " + person.eyeColor;
+
+    // demo2 change the eyeColor property using an alternate notation and output it
+    person["eyeColor"] = "green";
+    document.getElementById("demo3").innerHTML =
+    person.firstName + " eyes are " + person["eyeColor"];
+
+    // Add a new property to the person object and output it
+    person["hairColor"] = "brown";
+    document.getElementById("demo4").innerHTML =
+    person.firstName + " hair color is " + person.hairColor;
+
+    </script>
+</body>
+</html>

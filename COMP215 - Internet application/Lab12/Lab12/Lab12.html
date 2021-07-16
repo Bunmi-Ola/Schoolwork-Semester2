@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenWeatherMap Weather Search</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 30px;
+        }
+    </style>
+
+    <script>
+
+        var radioChecked = 0;
+        $(document).ready(function () {
+
+            $("div#City").show();
+            $("div#Postal").hide();
+            $("div#Latitude").hide();
+
+            $('input[type="radio"]').click(function () {
+                radioChecked = $(this).val();
+                $("div.myDiv").hide();
+                $("#" + radioChecked).show();
+
+
+
+            });
+
+
+            $("#SearchButton").click(
+                function (evt) {
+                    //evt.preventDefault();
+
+                    var xhttp = new XMLHttpRequest();
+
+                    xhttp.onreadystatechange = function () {
+                        // this refers to the XMLHttpRequest object
+                        if (this.readyState == 4 && this.status == 200) {
+
+                            var SearchResponse = this.responseText;
+                            document.getElementById("ResponseText").innerHTML = SearchResponse;
+
+                            var obj = JSON.parse(SearchResponse);
+
+                            var city_name = obj["name"]; // obj.name
+                            var country_name = obj["sys"]["country"]; //obj.sys.country
+                            // obj.weather[0].description <- the 1st element of the weather array's description property
+                            var weather_description = obj["weather"][0]["description"];
+                            var temp = obj["main"]["temp"]; // temp in K, subtract: C = K −273.15
+                            var pressure = obj["main"]["pressure"];
+                            var wind_speed = obj["wind"]["speed"];
+
+                            var SearchResultsHTML = "City: " + city_name + "<br />" +
+                                "Country: " + country_name + "<br />" +
+                                "Weather: " + weather_description + "<br />" +
+                                "Temperature: " + temp + "<br />" +
+                                "Pressure: " + pressure + "<br />" +
+                                "Wind Speed: " + wind_speed + "<br />";
+
+                            $("#SearchResults").html(SearchResultsHTML);
+
+                            var mainElement = document.getElementById('weatherPage');  
+                          
+                            var tableResultsHTML = '<tr><td>' + city_name + '</td>' +
+                                '<td>' + country_name + '</td>' +
+                                '<td>' + weather_description + '</td>' +
+                                '<td>' + temp + '</td>' +
+                                '<td>' + pressure + '</td>' +
+                                '<td>' + wind_speed + '</td>' +
+                                '<td><a class="delete" href="#">delete</a></td></tr>';
+                          
+                               
+
+                                //assigning value to the table
+                            $(mainElement).find('table tbody').append(tableResultsHTML);
+
+                              
+                            
+                        };
+                    }
+
+                    // compose and send request
+                    var CityName = $("#CityNameTextbox").val();
+                    var CountryCode = $("#CountryCodeTextbox").val();
+                    var PostalCode = $("#PostalCodeTextbox").val();
+                    var CityCode = $("#CityCodeTextbox").val();
+                    var LatitudeCode = $("#LatitudeTextbox").val();
+                    var LongetudeCode = $("#LongetudeTextbox").val();
+
+                    var apiKey = "8f9b22255e36a715c5ea7fad53c87938";
+
+                    var selectedRadio = $("input:radio[name=searchBy]:checked").val()
+
+                    var SearchString = 0;
+                    if (selectedRadio == "City") {
+                        SearchString = "http://api.openweathermap.org/data/2.5/weather" +
+                            "?q=" + CityName + "," + CountryCode +
+                            "&APPID=" + apiKey;
+                    }
+
+                    if (selectedRadio == "Postal") {
+                        SearchString = "http://api.openweathermap.org/data/2.5/weather" +
+                            "?q=" + PostalCode + "," + CityCode +
+                            "&APPID=" + apiKey;
+                    }
+
+                    if (selectedRadio == "Latitude") {
+                        SearchString = "http://api.openweathermap.org/data/2.5/weather" +
+                            "?lat=" + LatitudeCode + "&lon=" + LongetudeCode +
+                            "&APPID=" + apiKey;
+                    }
+
+                    xhttp.open("GET", SearchString, true);
+
+                    xhttp.send();
+
+                    // some sample requests
+                    //xhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=52453f34dee0d65b1a41a02656142c6b", true);
+                    //xhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=Regina,ca&APPID=52453f34dee0d65b1a41a02656142c6b", true);
+                    //xhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?zip=94040,us&APPID=52453f34dee0d65b1a41a02656142c6b", true);
+                    //xhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?zip=s6h,ca&APPID=52453f34dee0d65b1a41a02656142c6b", true);
+                    //xhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat=50.44&lon=-104.62&APPID=52453f34dee0d65b1a41a02656142c6b", true);
+                    //xhttp.send();
+                });
+        });
+    </script>
+
+
+</head>
+<body>
+    <main id="weatherPage">
+        <form>
+            <h2>OpenWeatherMap Weather Search</h2>
+            Search by: <br />
+            <input id="Radio1" name="searchBy" type="radio" value="City" checked /> City Name <br />
+            <input id="Radio2" name="searchBy" type="radio" value="Postal" /> Postal Code <br />
+            <input id="Radio3" name="searchBy" type="radio" value="Latitude" /> Latitude / Longitude <br />
+         
+            <br />
+            <div id="City" class="myDiv">
+                <label>City Name:</label> &nbsp <input id="CityNameTextbox" type="text" value="Regina" />
+                <label>Country Code:</label> &nbsp <input id="CountryCodeTextbox" type="text" value="ca" /> <br />
+            </div><br />
+
+            <div id="Postal" class="myDiv">
+                <label>Postal Code:</label> &nbsp <input id="PostalCodeTextbox" type="text" value="Postal" />
+                <label>City Code:</label> &nbsp <input id="CityCodeTextbox" type="text" value="city" /> <br />
+            </div><br />
+
+            <div id="Latitude" class="myDiv">
+                <label>Latitude:</label> &nbsp <input id="LatitudeTextbox" type="text" value="Latitude" />
+                <label>Longetude:</label> &nbsp <input id="LongetudeTextbox" type="text" value="city" /> <br />
+            </div><br />
+
+            <input id="SearchButton" type="button" value="Search" />
+        </form>
+        <h2>Search Results:</h2>
+        <h3>Raw Result Text</h3>
+        <p id="ResponseText"></p>
+        <h3>Parsed Results</h3>
+        <p id="SearchResults"></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Weather</th>
+                    <th>Temperature</th>
+                    <th>Pressure</th>
+                    <th>Wind Speed</th>
+                    <th><a class="deleteAll" href="#">Delete All</a></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+</body>
+</html>
+
+

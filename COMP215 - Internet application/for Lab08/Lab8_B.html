@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("button#Text").click(function () {
+                // your answer here:
+                $("div").text("Hello world!");
+            });
+
+            $("button#Value").click(function () {
+                // your answer here:
+                $("input").val("John Doe");
+            });
+
+            $("button#Image").click(function () {
+                // your answer here:
+                $("img").attr("src", "kitchens/counters.jpg");
+            });
+
+            $("button#href").click(function () {
+                // your answer here:
+                $("#myLink").text("Demo");
+                $("#myLink").attr("href", "https://www.demo.com");
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+        <h3>Exercise Sample Elements:</h3>
+
+        <div>
+            <p>Some paragraphs. Some paragraphs. Some paragraphs. Some paragraphs. </p>
+            <p id="Test"> IDTest paragraphs. IDTest paragraphs. IDTest paragraphs. IDTest paragraphs. </p>
+            <p>Some paragraphs. Some paragraphs. Some paragraphs. Some paragraphs. </p>
+
+        </div>
+
+    <p>Input field: <input type="text" value="Mickey Mouse"></p>
+
+    <img src="kitchens/base.jpg" />
+
+    <br /> <br />
+
+    <h2>Lab 08 Part B Exercise 1 - Use a jQuery method to change the text of a div element to "Hello World".</h2> <br />
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_dom_set1">jQuery Set Exercise 1</a> <br />
+    <button id="Text">Click me to change the text of a div element to "Hello World".</button> <br />
+  
+    <h2>Lab 08 Part B Exercise 2 - Use a jQuery method to change the value of an input field to "John Doe".</h2> <br />
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_dom_set2">jQuery Set Exercise 2</a> <br />
+    <button id="Value">Click me to change the value of an input field to "John Doe".</button> <br />
+
+    <h2>Lab 08 Part B Exercise 3 - Use a jQuery method to change the value of an image's src attribute to "myimage.jpg".</h2> <br />
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_dom_set3">jQuery Set Exercise 3</a> <br />
+    <button id="Image">Click me to change the value of an image's src attribute to "myimage.jpg".</button> <br />
+
+    <h2>Lab 08 Part B Exercise 4 - Use jQuery to change the text of a link to "Demo", and change the value of href's attribute value to "www.demo.com".</h2> <br />
+    <a id="myLink" href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_dom_set4">jQuery Set Exercise 4</a> <br />
+    <button id="href">Click me to change the text of a link to "Demo", and change the value of href's attribute value to "www.demo.com".</button> <br />
+
+</body>
+</html>

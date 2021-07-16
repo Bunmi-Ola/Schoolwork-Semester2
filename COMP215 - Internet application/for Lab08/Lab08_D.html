@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("button#backgroundColor").click(function () {
+                // your answer here:
+                $("p").css("background-color", "pink");
+            });
+
+            $("button#border").click(function () {
+                // your answer here:
+                $("p").css("border", "5px dotted red");
+            });
+
+            $("button#background").click(function () {
+                // your answer here:
+                $("p").css("background-color");
+            });
+
+            $("button#4").click(function () {
+                // your answer here:
+                $("p").css({ "background-color": "green", "color": "white", "padding": "15px", "font-size":"15px"});
+            });
+
+         });
+    </script>
+
+</head>
+<body>
+
+    <p>Some paragraphs. Some paragraphs. Some paragraphs. Some paragraphs. </p>
+    <br />
+
+    <h2>Lab 08 Part D Exercise 1 - Use the css() method to add a pink background color to a p element.</h2>
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_css1">jQuery CSS Exercise 1</a> <br />
+    <button id="backgroundColor">Click me to add a pink background color to a p element</button> <br />
+
+    <h2>Lab 08 Part D Exercise 2 - Use the css() method to add a 5 pixels red dotted border to a p element.</h2>
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_css2">jQuery CSS Exercise 2</a> <br />
+    <button id="border">Click me to add a 5 pixels red dotted border to a p element.</button> <br />
+
+    <h2>Lab 08 Part D Exercise 3 - Return the background color of a p element.</h2>
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_css3">jQuery CSS Exercise 3</a> <br />
+    <button id="3">Click me to Return the background color of a p element</button> <br />
+
+
+    <h2>
+Lab 08 Part D Exercise 4 - Use the css() method to set the following styles for p: Green background color, white text color, 25 pixels font size and a padding of 15 pixels.
+</h2>
+    <a href="https://www.w3schools.com/jquery/exercise_jq.asp?filename=exercise_jq_css4">jQuery CSS Exercise 4</a> <br />
+    <button id="4">Click me to set the styles for p</button> <br />
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Contacts</title>
+
+
+    <link href="contacts.css" rel="stylesheet" />
+
+
+</head>
+<body>
+    <header>Contacts</header>
+    <main id="contactScreen">
+        <section id="contactDetails">
+            <h2>Contact details</h2>
+            <form method="post">
+                <div class="formRow">
+                    <label for="contactName">Contact name</label>
+                    <input required autofocus autocomplete="off" name="contactName" class="validated" id="contactName" type="text" minlength="5" maxlength="100" />
+                </div>
+                <div class="formRow">
+                    <label for="phoneNumber">Phone number</label>
+                    <input required placeholder="Include area code" name="phoneNumber" class="validated" pattern="[0-9() ]{5,15}" id="phoneNumber" type="tel" />
+                </div>
+                <div class="formRow">
+                    <label for="emailAddress">Email address</label>
+                    <input required name="emailAddress" class="validated" id="emailAddress" type="email" />
+                </div>
+                <div class="formRow">
+                    <label for="companyName">Company name</label>
+                    <select name="companyName" id="companyName" class="validated" required>
+                        <option value="">Please select</option> <!--assign no value for the Please select option to make it invalid at fire up0-->
+                        <option value="1">ABC Incorporated</option>
+                        <option value="2">XZY Ltd</option>
+                        <option value="3">ACME International</option>
+                    </select>
+                </div>
+                <div class="formRow">
+                    <label for="notes">Notes</label>
+                    <textarea cols="40" rows="6" name="notes" id="notes" class="validated"
+                              maxlength="1000"></textarea>
+                </div>
+                <div class="formRow">
+                    <label for="lastContacted">Last contacted</label>
+                    <input required name="lastContacted" id="lastContacted" type="date" />
+                </div>
+                <div class="formRow">
+                    <input style="width:70px" type="submit" value="Save" />
+                </div>
+            </form>
+        </section>
+        <section id="contactList">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Contact name</th>
+                        <th>Phone number</th>
+                        <th>Email address</th>
+                        <th>Company name</th>
+                        <th>Last contacted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>William Smith</td>
+                        <td>555-642-737</td>
+                        <td>william@testing.com</td>
+                        <td>ACME Industries</td>
+                        <td><time datetime="2014-10-21">2014-10-21</time></td>
+                    </tr>
+                    <tr>
+                        <td>Bob Morris</td>
+                        <td>555-999-299</td>
+                        <td>bob@testing.com</td>
+                        <td>ABC Corp</td>
+                        <td><time datetime="2014-09-12">2014-09-12</time></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">2 contacts displayed</td>
+                    </tr>
+                </tfoot>
+                <caption>Sales leads</caption>
+            </table>
+        </section>
+    </main>
+    <footer>Copyright 2014</footer>
+
+    <script>
+
+        var nameTextbox = document.getElementById("contactName");
+        var emailTextBox = document.getElementById("emailAddress");
+        var phoneTextBox = document.getElementById("phoneNumber");
+
+        nameTextbox.oninvalid = validInput;
+        emailTextBox.oninvalid = validInput;
+        phoneTextBox.oninvalid = validInput;
+
+
+        nameTextbox.checkValidity();
+        emailTextBox.checkValidity();
+        phoneTextBox.checkValidity();
+
+
+
+        function validInput(event) {
+            inputTextbox = event.target;//Global variable
+            inputTextbox.setCustomValidity(""); // clear out the validity message
+           
+            //if (!nameTextbox.validity.valid || !emailTextBox.validity.valid || !phoneTextBox.validity.valid) {
+            if (!inputTextbox.validity.valid) {
+                inputTextbox.setCustomValidity("");
+                // if any validation constraint fails
+                if (inputTextbox == nameTextbox) { //compare global variable with each textbox
+                    if (inputTextbox.validity.rangeOverflow) {
+                        inputTextbox.setCustomValidity(" Value too large, max allowed is 100 characters");
+                    }
+                    if (inputTextbox.validity.rangeUnderflow) {
+                        inputTextbox.setCustomValidity(" Value too small, min accepted is 5 characters ");
+                    }
+                    if (inputTextbox.validity.valueMissing) {
+                        inputTextbox.setCustomValidity(" Name Value is missing ");
+                    }
+                }
+                if (inputTextbox == emailTextBox) { //compare global variable with each textbox
+                    inputTextbox.setCustomValidity("");
+                    if (inputTextbox.validity.typeMismatch) {
+                        inputTextbox.setCustomValidity(" You entered a wrong value type (type mismatch)");
+                    } if (inputTextbox.validity.valueMissing) {
+                        inputTextbox.setCustomValidity("Email value is missing")
+                    }
+                }
+                if (inputTextbox == phoneTextBox) { //compare global variable with each textbox
+                    inputTextbox.setCustomValidity("");
+                    if (inputTextbox.validity.valueMissing) {
+                        inputTextbox.setCustomValidity(" Phone Value is missing ");
+                    }
+                    if (inputTextbox.validity.patternMismatch) {
+                        inputTextbox.setCustomValidity("Wrong value entered")
+                    }
+
+                }
+
+            }
+       
+        };
+
+        nameTextbox.oninput = function () { nameTextbox.checkValidity(); }
+        emailTextBox.oninput = function () { emailTextBox.checkValidity(); }
+        phoneTextBox.oninput = function () { phoneTextBox.checkValidity(); }
+
+    </script>
+</body>
+
+</html>
+
+

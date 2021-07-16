@@ -1,0 +1,75 @@
+var radioChecked = 0;
+
+var cityNameTextBox = document.getElementById("CityNameTextbox");
+var countryCodeTextBox = document.getElementById("CountryCodeTextbox");
+var PostalCodeTextBox = document.getElementById("PostalCodeTextbox");
+var cityCodeTextBox = document.getElementById("CityCodeTextbox");
+var latitudeTextBox = document.getElementById("LatitudeTextbox");
+var longetudeTextBox = document.getElementById("LongetudeTextbox");
+
+
+cityNameTextBox.oninvalid = validInput;
+countryCodeTextBox.oninvalid = validInput;
+PostalCodeTextBox.oninvalid = validInput;
+cityCodeTextBox.oninvalid = validInput;
+latitudeTextBox.oninvalid = validInput;
+longetudeTextBox.oninvalid = validInput;
+
+
+cityNameTextBox.checkValidity();
+countryCodeTextBox.checkValidity();
+PostalCodeTextBox.checkValidity();
+cityCodeTextBox.checkValidity();
+latitudeTextBox.checkValidity();
+longetudeTextBox.checkValidity();
+
+
+function validInput(event) {
+    inputTextbox = event.target;//Global variable
+    inputTextbox.setCustomValidity(""); // clear out the validity message
+
+    //if (!nameTextbox.validity.valid || !emailTextBox.validity.valid || !phoneTextBox.validity.valid) {
+    if (!inputTextbox.validity.valid) {
+        inputTextbox.setCustomValidity("");
+        // if any validation constraint fails
+        if (inputTextbox == cityNameTextBox) { //compare global variable with each textbox
+            if (inputTextbox == "") {
+                inputTextbox.setCustomValidity(" Please enter a city Name such as Regina");
+            }
+           
+        }
+
+        
+    }
+
+};
+
+   var tableResultsHTML = '<tr><td>' + city_name + '</td>' +
+                        '<td>' + country_name + '</td>' +
+                        '<td>' + weather_description + '</td>' +
+                        '<td>' + temp + '</td>' +
+                        '<td>' + pressure + '</td>' +
+                        '<td>' + wind_speed + '</td>' +
+                        '<td><a class="delete" href="#">delete</a></td></tr>';
+
+
+
+                    //assigning value to the table
+                    $(mainElement).find('table tbody').append(tableResultsHTML);
+
+
+cityNameTextBox.oninput = function () { cityNameTextBox.checkValidity(); }
+
+
+ <th>City</th>
+                    <th>Country</th>
+                    <th>Longitude</th>
+                    <th>Latitude</th>
+                    <th>Weather</th>
+                    <th>Temperature</th>
+                    <th>Pressure</th>
+                    <th>Humidity</th>
+                    <th>Wind Speed</th>
+                    <th>Wind Direction</th>
+                    <th>Sunrise</th>
+                    <th>Sunset</th>

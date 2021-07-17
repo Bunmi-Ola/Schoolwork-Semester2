@@ -150,7 +150,7 @@ $(document).ready(function () {
                     var LatitudeCode = $("#LatitudeTextbox").val();
                     var LongetudeCode = $("#LongetudeTextbox").val();
 
-                    var apiKey = "8f9b22255e36a715c5ea7fad53c87938";
+                    var apiKey = "";
 
                     var selectedRadio = $("input:radio[name=searchBy]:checked").val()
 
